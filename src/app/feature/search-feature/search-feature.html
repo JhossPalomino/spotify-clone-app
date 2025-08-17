@@ -1,0 +1,11 @@
+<div class="absolute top-full left-0 w-full z-50 bg-gray-900 border-t border-gray-700 shadow-lg">
+  <div *ngIf="results?.tracks?.items?.length" class="max-h-[400px] overflow-y-auto p-4">
+    <h3 class="text-white text-lg font-semibold mb-4">Resultados:</h3>
+    <div class="space-y-2">
+      <div *ngFor="let track of results.tracks.items" class="bg-gray-800 p-4 rounded text-white hover:bg-gray-700 transition" (click)="goToTrack(track.id)">
+        <div class="font-semibold">{{ track.name }}</div>
+        <div class="text-sm text-gray-400">{{ track.artists[0]?.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>

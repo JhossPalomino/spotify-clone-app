@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout/main-layout';
 import { AuthPage } from './feature/auth-page/auth-page';
+import { TrackDetail } from './feature/track-detail/track-detail';
 
 export const routes: Routes = [
   {
@@ -16,5 +17,6 @@ export const routes: Routes = [
         loadComponent: () => import('./feature/album-page/album-page').then(c => c.AlbumPage)
       }
     ]
-  }
+  },
+  {path: 'track/:id', component: TrackDetail},
 ];

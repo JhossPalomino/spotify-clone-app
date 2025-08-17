@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyAuthApi } from '../../core/services/spotify-auth-api';
+import { Observable, tap } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-auth-page',
@@ -13,6 +15,7 @@ export class AuthPage implements OnInit {
   #route = inject(ActivatedRoute);
   #authApi = inject(SpotifyAuthApi);
 
+
   ngOnInit(): void {
     const code = this.#route.snapshot.queryParams['code'];
     console.log('Authorization code:', code);
@@ -23,4 +26,5 @@ export class AuthPage implements OnInit {
       }
     )
   }
+
 }

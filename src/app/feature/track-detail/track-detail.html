@@ -1,0 +1,21 @@
+<div class="min-h-screen bg-zinc-900 text-white flex flex-col items-center justify-center px-4 py-10 space-y-8">
+  <div class="text-center space-y-2">
+    <h1 class="text-3xl font-bold">{{ track.name }}</h1>
+    <p class="text-lg text-zinc-400">Artista: {{ track.artists[0]?.name }}</p>
+    <p class="text-lg text-zinc-400">Álbum: {{ track.album?.name }}</p>
+  </div>
+
+  <div *ngIf="spotifyEmbedUrl" class="w-full max-w-2xl">
+    <iframe
+      [src]="spotifyEmbedUrl"
+      class="w-full h-[120px] rounded-lg shadow-lg"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media">
+    </iframe>
+  </div>
+
+  <a (click)="goToHome()" class="mt-6 inline-block px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-full transition">
+    Volver a inicio
+  </a>
+</div>

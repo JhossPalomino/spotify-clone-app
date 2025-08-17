@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { map, Observable, tap } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
 import { SpotifyTokenResponse } from '../interfaces/spotify-response';
 
@@ -48,6 +48,22 @@ export class SpotifyAuthApi {
 
   get token(): string | null {
     return localStorage.getItem('spotify_token');
+    console.log('Token obtenido:', this.token);
+  }
+
+  getAppToken(): Observable<string> {
+  const body = new HttpParams()
+    .set('grant_type', 'client_credentials');
+
+  const headers = new HttpHeaders({
+    'Authorization': 'Basic ' + btoa(`${'8f2d9cf1214a4217baae93a4b954b9a3'}:${'c682e290323444959b1cba2af5fd4627'}`),
+    'Content-Type': 'application/x-www-form-urlencoded'
+  });
+
+  return this.#http.post<any>('https://accounts.spotify.com/api/token', body.toString(), { headers })
+    .pipe(
+    tap(res => localStorage.setItem('spotify_token', res.access_token)),
+    map(res => res.access_token));
   }
 
 }
